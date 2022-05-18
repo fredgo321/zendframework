@@ -55,7 +55,7 @@ abstract class AbstractControllerTestCase extends TestCase
     /**
      * Reset the application for isolation
      */
-    protected function setUp()
+    protected function setUp() :void
     {
         $this->usedConsoleBackup = Console::isConsole();
         $this->reset();
@@ -64,7 +64,7 @@ abstract class AbstractControllerTestCase extends TestCase
     /**
      * Restore params
      */
-    protected function tearDown()
+    protected function tearDown() : void
     {
         Console::overrideIsConsole($this->usedConsoleBackup);
 
