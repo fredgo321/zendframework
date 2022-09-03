@@ -139,7 +139,8 @@ class Gettext extends AbstractFileLoader
         }
 
         // Read header entries
-        if (array_key_exists('', $textDomain)) {
+        //if (array_key_exists('', $textDomain)) {
+        if (property_exists($textDomain,'')) {//
             $rawHeaders = explode("\n", trim($textDomain['']));
 
             foreach ($rawHeaders as $rawHeader) {

@@ -93,6 +93,7 @@ class SessionManager extends AbstractManager
         }
 
         $saveHandler = $this->getSaveHandler();
+
         if ($saveHandler instanceof SaveHandler\SaveHandlerInterface) {
             // register the session handler with ext/session
             $this->registerSaveHandler($saveHandler);
@@ -112,6 +113,7 @@ class SessionManager extends AbstractManager
         }
 
         $storage = $this->getStorage();
+
 
         // Since session is starting, we need to potentially repopulate our
         // session storage

@@ -260,13 +260,4 @@ class DirectoryScanner implements ScannerInterface
         // @todo
     }
 
-    /**
-     * __ToString
-     *
-     * @todo implement method
-     */
-    public function __toString()
-    {
-        // @todo
-    }
 }

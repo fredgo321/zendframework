@@ -52,7 +52,7 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return $this->queue->count();
     }
@@ -62,7 +62,10 @@ class AggregateResolver implements Countable, IteratorAggregate, ResolverInterfa
      *
      * @return PriorityQueue
      */
-    public function getIterator()
+    /**
+     * @return \Traversable
+     */
+    public function getIterator() : \Traversable
     {
         return $this->queue;
     }

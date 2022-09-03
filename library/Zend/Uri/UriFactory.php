@@ -95,7 +95,10 @@ abstract class UriFactory
         }
 
         $uri    = new Uri($uriString);
-        $scheme = strtolower($uri->getScheme());
+        $scheme = $uri->getScheme();
+        if ( is_string($scheme) ) {
+            $scheme = strtolower($scheme);//PHP8
+        }
         if (!$scheme && $defaultScheme) {
             $scheme = $defaultScheme;
         }

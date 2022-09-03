@@ -129,7 +129,7 @@ class Variables extends ArrayObject
      * @param  mixed $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetGet($key) : mixed
     {
         if (!$this->offsetExists($key)) {
             if ($this->isStrict()) {
@@ -138,7 +138,7 @@ class Variables extends ArrayObject
                     $key
                 ), E_USER_NOTICE);
             }
-            return;
+            return null;//PHP8
         }
 
         $return = parent::offsetGet($key);

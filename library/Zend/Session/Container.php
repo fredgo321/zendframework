@@ -25,7 +25,7 @@ class Container extends AbstractContainer
      * @param  string $key
      * @return mixed
      */
-    public function &offsetGet($key)
+    public function &offsetGet($key) : mixed
     {
         $ret = null;
         if (!$this->offsetExists($key)) {
@@ -37,4 +37,5 @@ class Container extends AbstractContainer
 
         return $ret;
     }
+
 }

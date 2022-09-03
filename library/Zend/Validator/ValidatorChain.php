@@ -53,7 +53,7 @@ class ValidatorChain implements
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->validators);
     }

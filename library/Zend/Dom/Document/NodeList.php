@@ -45,13 +45,13 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Iterator: rewind to first element
      *
-     * @return DOMNode
+     * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->position = 0;
-
-        return $this->list->item(0);
+        $this->list->item(0);
+        //return $this->list->item(0);//PHP8
     }
 
     /**
@@ -59,7 +59,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         if (in_array($this->position, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
@@ -71,9 +71,9 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Iterator: return current element
      *
-     * @return DOMNode
+     * @return mixed
      */
-    public function current()
+    public function current() : mixed
     {
         return $this->list->item($this->position);
     }
@@ -81,23 +81,22 @@ class NodeList implements Iterator, Countable, ArrayAccess
     /**
      * Iterator: return key of current element
      *
-     * @return int
+     * @return mixed
      */
-    public function key()
+    public function key() : mixed
     {
         return $this->position;
     }
 
     /**
      * Iterator: move to next element
-     *
-     * @return DOMNode
+     * @return void
      */
-    public function next()
+    public function next() : void
     {
         ++$this->position;
-
-        return $this->list->item($this->position);
+        $this->list->item($this->position);
+        //return $this->list->item($this->position);PHP8
     }
 
     /**
@@ -105,7 +104,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return $this->list->length;
     }
@@ -116,7 +115,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * @param int $key
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key) : bool
     {
         if (in_array($key, range(0, $this->list->length - 1)) && $this->list->length > 0) {
             return true;
@@ -130,7 +129,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * @param int $key
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetGet($key) : mixed
     {
         return $this->list->item($key);
     }
@@ -142,7 +141,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * @param  mixed $value
      * @throws Exception\BadMethodCallException when attempting to write to a read-only item
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value) : void
     {
         throw new Exception\BadMethodCallException('Attempting to write to a read-only list');
     }
@@ -153,7 +152,7 @@ class NodeList implements Iterator, Countable, ArrayAccess
      * @param  mixed $key
      * @throws Exception\BadMethodCallException when attempting to unset a read-only item
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key) : void
     {
         throw new Exception\BadMethodCallException('Attempting to unset on a read-only list');
     }

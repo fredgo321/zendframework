@@ -14,7 +14,7 @@ use Serializable;
 /**
  * Serializable version of SplQueue
  */
-class SplQueue extends \SplQueue implements Serializable
+class SplQueue extends \SplQueue
 {
     /**
      * Return an array representing the queue
@@ -30,25 +30,22 @@ class SplQueue extends \SplQueue implements Serializable
         return $array;
     }
 
+
     /**
-     * Serialize
-     *
-     * @return string
+     * @return array
      */
-    public function serialize()
+    public function __serialize() : array
     {
-        return serialize($this->toArray());
+        return $this->toArray();
     }
 
     /**
-     * Unserialize
-     *
-     * @param  string $data
+     * @param $data
      * @return void
      */
-    public function unserialize($data)
+    public function __unserialize($data) : void
     {
-        foreach (unserialize($data) as $item) {
+        foreach ($data as $item) {
             $this->push($item);
         }
     }

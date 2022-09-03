@@ -177,7 +177,7 @@ class AddressList implements Countable, Iterator
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->addresses);
     }
@@ -188,18 +188,19 @@ class AddressList implements Countable, Iterator
      * @return mixed the value of the first addresses element, or false if the addresses is
      * empty.
      * @see addresses
+     * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
-        return reset($this->addresses);
+        //return reset($this->addresses);PHP8
+        reset($this->addresses);
     }
 
     /**
      * Return current item in iteration
-     *
-     * @return Address
+     * @return false|mixed
      */
-    public function current()
+    public function current() : mixed
     {
         return current($this->addresses);
     }
@@ -207,9 +208,9 @@ class AddressList implements Countable, Iterator
     /**
      * Return key of current item of iteration
      *
-     * @return string
+     * @return int|mixed|string|null
      */
-    public function key()
+    public function key() : mixed
     {
         return key($this->addresses);
     }
@@ -221,9 +222,10 @@ class AddressList implements Countable, Iterator
      * internal array pointer, or false if there are no more elements.
      * @see addresses
      */
-    public function next()
+    public function next() : void
     {
-        return next($this->addresses);
+        next($this->addresses);
+        //return next($this->addresses);//PHP8
     }
 
     /**
@@ -231,7 +233,7 @@ class AddressList implements Countable, Iterator
      *
      * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         $key = key($this->addresses);
         return ($key !== null && $key !== false);

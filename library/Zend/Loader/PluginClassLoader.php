@@ -210,7 +210,7 @@ class PluginClassLoader implements PluginClassLocator
      *
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator() : Traversable
     {
         return new ArrayIterator($this->plugins);
     }

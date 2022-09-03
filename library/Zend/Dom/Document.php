@@ -227,7 +227,7 @@ class Document
     protected function getDomDocumentFromString($stringDocument)
     {
         libxml_use_internal_errors(true);
-        libxml_disable_entity_loader(true);
+        //libxml_disable_entity_loader(true);//PHP8
 
         $encoding  = $this->getEncoding();
         $domDoc    = null === $encoding ? new DOMDocument('1.0') : new DOMDocument('1.0', $encoding);
@@ -257,7 +257,7 @@ class Document
             libxml_clear_errors();
         }
 
-        libxml_disable_entity_loader(false);
+        //libxml_disable_entity_loader(false);PHP8
         libxml_use_internal_errors(false);
 
         if (!$success) {

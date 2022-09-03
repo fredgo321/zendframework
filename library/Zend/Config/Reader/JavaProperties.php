@@ -113,6 +113,8 @@ class JavaProperties implements ReaderInterface
                 continue;
             }
 
+            $value = '';
+
             // Add a new key-value pair or append value to a previous pair
             if (!$isWaitingOtherLine) {
                 $key = substr($line, 0, strpos($line, ':'));

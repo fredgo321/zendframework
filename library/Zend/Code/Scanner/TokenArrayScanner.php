@@ -274,10 +274,6 @@ class TokenArrayScanner implements ScannerInterface
         // @todo
     }
 
-    public function __toString()
-    {
-        // @todo
-    }
 
     /**
      * Scan

@@ -275,12 +275,12 @@ abstract class AbstractContainer extends ArrayObject
      * Append a value to the end of the container
      *
      * @param  mixed $value
-     * @return self
+     * @return void
      */
-    public function append($value)
+    public function append($value) : void
     {
         parent::append($value);
-        return $this;
+        //return $this;PHP8
     }
 
     /**

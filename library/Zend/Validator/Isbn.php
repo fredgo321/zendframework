@@ -105,7 +105,7 @@ class Isbn extends AbstractValidator
                 $isbn10 = str_replace($this->getSeparator(), '', $value);
                 $sum    = 0;
                 for ($i = 0; $i < 9; $i++) {
-                    $sum += (10 - $i) * $isbn10{$i};
+                    $sum += (10 - $i) * $isbn10[$i];
                 }
 
                 // checksum
@@ -123,9 +123,9 @@ class Isbn extends AbstractValidator
                 $sum    = 0;
                 for ($i = 0; $i < 12; $i++) {
                     if ($i % 2 == 0) {
-                        $sum += $isbn13{$i};
+                        $sum += $isbn13[$i];
                     } else {
-                        $sum += 3 * $isbn13{$i};
+                        $sum += 3 * $isbn13[$i];
                     }
                 }
                 // checksum

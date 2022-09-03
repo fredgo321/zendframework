@@ -35,7 +35,7 @@ class SplStack extends \SplStack implements Serializable
      *
      * @return string
      */
-    public function serialize()
+    public function serialize() : string
     {
         return serialize($this->toArray());
     }
@@ -46,7 +46,7 @@ class SplStack extends \SplStack implements Serializable
      * @param  string $data
      * @return void
      */
-    public function unserialize($data)
+    public function unserialize($data) : void
     {
         foreach (unserialize($data) as $item) {
             $this->unshift($item);

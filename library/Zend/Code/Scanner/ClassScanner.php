@@ -828,10 +828,6 @@ class ClassScanner implements ScannerInterface
         // @todo
     }
 
-    public function __toString()
-    {
-        // @todo
-    }
 
     /**
      * Scan tokens

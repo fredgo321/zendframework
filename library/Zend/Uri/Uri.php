@@ -194,7 +194,7 @@ class Uri implements UriInterface
     public function isValid()
     {
         if ($this->host) {
-            if (strlen($this->path) > 0 && substr($this->path, 0, 1) != '/') {
+            if (null !== $this->path && strlen($this->path) > 0 && 0 !== strpos($this->path, '/')) {
                 return false;
             }
             return true;
@@ -206,7 +206,7 @@ class Uri implements UriInterface
 
         if ($this->path) {
             // Check path-only (no host) URI
-            if (substr($this->path, 0, 2) == '//') {
+            if (0 === strpos($this->path, '//')) {
                 return false;
             }
             return true;

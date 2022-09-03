@@ -125,7 +125,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -162,7 +162,7 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return SplPriorityQueue
      */
-    public function getIterator()
+    public function getIterator() : \Traversable
     {
         $queue = $this->getQueue();
         return clone $queue;
@@ -173,9 +173,34 @@ class PriorityQueue implements Countable, IteratorAggregate, Serializable
      *
      * @return string
      */
+    public function __serialize()
+    {
+        return serialize($this->items);
+    }
+
+    /**
+     * Serialize the data structure
+     *
+     * @return string
+     */
     public function serialize()
     {
         return serialize($this->items);
+    }
+
+    /**
+     * Unserialize a string into a PriorityQueue object
+     *
+     * Serialization format is compatible with {@link Zend\Stdlib\SplPriorityQueue}
+     *
+     * @param  string $data
+     * @return void
+     */
+    public function __unserialize($data)
+    {
+        foreach (unserialize($data) as $item) {
+            $this->insert($item['data'], $item['priority']);
+        }
     }
 
     /**

@@ -227,11 +227,21 @@ abstract class ArrayUtils
             return iterator_to_array($iterator);
         }
 
+        /* PHP8
         if (method_exists($iterator, 'toArray')) {
             return $iterator->toArray();
+        }*/
+
+        if (
+            is_object($iterator)
+            && ! $iterator instanceof Iterator
+            && method_exists($iterator, 'toArray')
+        ) {
+            $array = $iterator->toArray();
+            return $array;
         }
 
-        $array = array();
+        $array = [];
         foreach ($iterator as $key => $value) {
             if (is_scalar($value)) {
                 $array[$key] = $value;

@@ -81,12 +81,12 @@ class Parameters extends PhpArrayObject implements ParametersInterface
      * @param  string $name
      * @return mixed
      */
-    public function offsetGet($name)
+    public function offsetGet($name) : mixed
     {
         if ($this->offsetExists($name)) {
             return parent::offsetGet($name);
         }
-        return;
+        return null;
     }
 
     /**

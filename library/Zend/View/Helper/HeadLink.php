@@ -230,7 +230,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function offsetSet($index, $value)
+    public function offsetSet($index, $value) : void
     {
         if (!$this->isValid($value)) {
             throw new Exception\InvalidArgumentException(
@@ -238,7 +238,8 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
             );
         }
 
-        return $this->getContainer()->offsetSet($index, $value);
+        //return $this->getContainer()->offsetSet($index, $value);PHP8
+        $this->getContainer()->offsetSet($index, $value);
     }
 
     /**
@@ -373,6 +374,7 @@ class HeadLink extends Placeholder\Container\AbstractStandalone
         $media                 = 'screen';
         $conditionalStylesheet = false;
         $href                  = array_shift($args);
+        $extras = [];//PHP8
 
         if ($this->isDuplicateStylesheet($href)) {
             return false;

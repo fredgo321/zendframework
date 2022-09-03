@@ -19,7 +19,7 @@ use Serializable;
  *
  * Extends version-specific "abstract" implementation.
  */
-class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
+class ArrayObject implements IteratorAggregate, ArrayAccess, Serializable, Countable
 {
     /**
      * Properties of the object have their normal functionality
@@ -167,7 +167,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      *
      * @return int
      */
-    public function count() : int
+    public function count()
     {
         return count($this->storage);
     }
@@ -223,7 +223,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      *
      * @return \Iterator
      */
-    public function getIterator() : \Traversable
+    public function getIterator()
     {
         $class = $this->iteratorClass;
 
@@ -276,7 +276,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      * @param  mixed $key
      * @return bool
      */
-    public function offsetExists($key) : bool
+    public function offsetExists($key)
     {
         return isset($this->storage[$key]);
     }
@@ -287,7 +287,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      * @param  mixed $key
      * @return mixed
      */
-    public function &offsetGet($key) : mixed
+    public function &offsetGet($key)
     {
         $ret = null;
         if (!$this->offsetExists($key)) {
@@ -305,7 +305,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      * @param  mixed $value
      * @return void
      */
-    public function offsetSet($key, $value) : void
+    public function offsetSet($key, $value)
     {
         $this->storage[$key] = $value;
     }
@@ -316,7 +316,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      * @param  mixed $key
      * @return void
      */
-    public function offsetUnset($key) : void
+    public function offsetUnset($key)
     {
         if ($this->offsetExists($key)) {
             unset($this->storage[$key]);
@@ -328,21 +328,10 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      *
      * @return string
      */
-    /*
     public function serialize()
     {
         return serialize(get_object_vars($this));
-    }*/
-
-
-    /**
-     * @return array
-     */
-    public function __serialize()
-    {
-        return get_object_vars($this);
     }
-
 
     /**
      * Sets the behavior flags
@@ -413,7 +402,6 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
      * @param  string $data
      * @return void
      */
-    /*
     public function unserialize($data)
     {
         $ar                        = unserialize($data);
@@ -435,44 +423,7 @@ class ArrayObject implements IteratorAggregate, ArrayAccess, Countable
                     $this->setIteratorClass($v);
                     break;
                 case 'protectedProperties':
-                    continue 2;//PHP8 change from continue
-                default:
-                    $this->__set($k, $v);
-            }
-        }
-    }
-    */
-
-    /**
-     * Unserialize an ArrayObject
-     *
-     * @param  string $data
-     * @return void
-     */
-
-    public function __unserialize($data) : void
-    {
-        //$ar                        = unserialize($data);//PHP8
-        $ar                        = $data;
-        $this->protectedProperties = array_keys(get_object_vars($this));
-
-        $this->setFlags($ar['flag']);
-        $this->exchangeArray($ar['storage']);
-        $this->setIteratorClass($ar['iteratorClass']);
-
-        foreach ($ar as $k => $v) {
-            switch ($k) {
-                case 'flag':
-                    $this->setFlags($v);
-                    break;
-                case 'storage':
-                    $this->exchangeArray($v);
-                    break;
-                case 'iteratorClass':
-                    $this->setIteratorClass($v);
-                    break;
-                case 'protectedProperties':
-                    continue 2;//PHP8 change from continue
+                    continue;
                 default:
                     $this->__set($k, $v);
             }

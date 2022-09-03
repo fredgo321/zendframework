@@ -186,19 +186,20 @@ class PriorityList implements Iterator, Countable
         return 1 === $this->isLIFO;
     }
 
+
     /**
-     * {@inheritDoc}
+     * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         $this->sort();
         reset($this->items);
     }
 
     /**
-     * {@inheritDoc}
+     * @return mixed
      */
-    public function current()
+    public function current() : mixed
     {
         $this->sorted || $this->sort();
         $node = current($this->items);
@@ -206,29 +207,32 @@ class PriorityList implements Iterator, Countable
         return $node ? $node['data'] : false;
     }
 
+
     /**
-     * {@inheritDoc}
+     * @return mixed
      */
-    public function key()
+    public function key() : mixed
     {
         $this->sorted || $this->sort();
         return key($this->items);
     }
 
+
     /**
-     * {@inheritDoc}
+     * @return false|mixed|string|void
      */
-    public function next()
+    public function next() : void
     {
         $node = next($this->items);
 
-        return $node ? $node['data'] : false;
+        //return $node ? $node['data'] : false;//PHP8
     }
 
+
     /**
-     * {@inheritDoc}
+     * @return bool
      */
-    public function valid()
+    public function valid() : bool
     {
         return current($this->items) !== false;
     }
@@ -241,10 +245,11 @@ class PriorityList implements Iterator, Countable
         return clone $this;
     }
 
+
     /**
-     * {@inheritDoc}
+     * @return int
      */
-    public function count()
+    public function count() : int
     {
         return $this->count;
     }

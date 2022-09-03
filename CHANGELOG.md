@@ -1,4 +1,6 @@
 # CHANGELOG
+## 2.4.13php8.1-compat
+- PHP8 compatibility changes
 
 ## 2.4.13 (2017-07-13)
 

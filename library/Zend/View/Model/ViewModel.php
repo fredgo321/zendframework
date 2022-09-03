@@ -224,8 +224,13 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
     public function getVariable($name, $default = null)
     {
         $name = (string) $name;
-        if (array_key_exists($name, $this->variables)) {
-            return $this->variables[$name];
+
+        if (is_array($this->variables)) {
+            if (array_key_exists($name, $this->variables)) {
+                return $this->variables[$name];
+            }
+        } elseif ($this->variables->offsetExists($name)) {//PHP8
+            return $this->variables->offsetGet($name);
         }
 
         return $default;
@@ -474,7 +479,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->children);
     }
@@ -484,7 +489,7 @@ class ViewModel implements ModelInterface, ClearableModelInterface, RetrievableC
      *
      * @return ArrayIterator
      */
-    public function getIterator()
+    public function getIterator() : Traversable
     {
         return new ArrayIterator($this->children);
     }

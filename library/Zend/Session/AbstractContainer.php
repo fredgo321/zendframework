@@ -384,7 +384,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  mixed  $value
      * @return void
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value) : void
     {
         $this->expireKeys($key);
         $storage = $this->verifyNamespace();
@@ -398,7 +398,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key) : bool
     {
         // If no container exists, we can't inspect it
         if (null === ($storage = $this->verifyNamespace(false))) {
@@ -422,10 +422,11 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return mixed
      */
-    public function &offsetGet($key)
+    public function &offsetGet($key) : mixed
     {
         if (!$this->offsetExists($key)) {
-            return;
+            $ret = null;
+            return $ret;//PHP8
         }
         $storage = $this->getStorage();
         $name = $this->getName();
@@ -439,7 +440,7 @@ abstract class AbstractContainer extends ArrayObject
      * @param  string $key
      * @return void
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key) : void
     {
         if (!$this->offsetExists($key)) {
             return;
@@ -480,10 +481,9 @@ abstract class AbstractContainer extends ArrayObject
 
     /**
      * Iterate over session container
-     *
-     * @return Iterator
+     * @return Traversable
      */
-    public function getIterator()
+    public function getIterator() : Traversable
     {
         $this->expireKeys();
         $storage   = $this->getStorage();
